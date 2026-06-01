@@ -16,9 +16,14 @@ COPY . .
 
 RUN composer install --no-dev --optimize-autoloader
 
-RUN php artisan migrate --force
+RUN mkdir -p database
+RUN touch database/database.sqlite
 
-RUN chmod -R 777 storage bootstrap/cache
+RUN mkdir -p storage/framework/sessions
+RUN mkdir -p storage/framework/views
+RUN mkdir -p storage/framework/cache
+
+RUN chmod -R 777 storage bootstrap/cache database
 
 EXPOSE 10000
 
