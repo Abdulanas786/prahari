@@ -18,6 +18,16 @@ class DatabaseSeeder extends Seeder
     {
         // Only seed if tables are empty (prevents duplicates on re-deploy)
         if (Category::count() === 0) {
+            // Create default admin user
+            \App\Models\User::firstOrCreate(
+                ['email' => 'admin@admin.com'],
+                [
+                    'name' => 'Admin User',
+                    'password' => \Illuminate\Support\Facades\Hash::make('password'),
+                    'role' => 'admin'
+                ]
+            );
+
             $this->call([
                 CategorySeeder::class,
                 PrahariSeeder::class,
