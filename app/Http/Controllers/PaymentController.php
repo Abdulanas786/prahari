@@ -68,16 +68,16 @@ class PaymentController extends Controller
             return DataTables::of($query)
                 ->filterColumn('prahari_name', function($query, $keyword) use ($request) {
                     if ($request->has('tab') && $request->tab === 'all') {
-                        $query->whereRaw("LOWER(transactions.prahari_name) like ?", ["%".strtolower($keyword)."%"]);
+                        $query->whereRaw("LOWER(transactions.prahari_name) ilike ?", ["%".strtolower($keyword)."%"]);
                     } else {
-                        $query->whereRaw("LOWER(praharis.Prahari) like ?", ["%".strtolower($keyword)."%"]);
+                        $query->whereRaw("LOWER(praharis.\"Prahari\") ilike ?", ["%".strtolower($keyword)."%"]);
                     }
                 })
                 ->filterColumn('date', function($query, $keyword) use ($request) {
                     if ($request->has('tab') && $request->tab === 'all') {
-                        $query->whereRaw("transactions.transaction_date like ?", ["%{$keyword}%"]);
+                        $query->whereRaw("CAST(transactions.transaction_date AS TEXT) ilike ?", ["%{$keyword}%"]);
                     } else {
-                        $query->whereRaw("payments.date like ?", ["%{$keyword}%"]);
+                        $query->whereRaw("CAST(payments.date AS TEXT) ilike ?", ["%{$keyword}%"]);
                     }
                 })
                 ->addColumn('request_id', function ($row) {

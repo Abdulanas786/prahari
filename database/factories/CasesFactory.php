@@ -22,7 +22,7 @@ class CasesFactory extends Factory
         return [
             'prahari_id' => Prahari::inRandomOrder()->first()->id ?? Prahari::factory(),
             'category_id' => Category::inRandomOrder()->first()->id ?? Category::factory(),
-            'Location' => $this->faker->randomElement([
+            'Location' => fake()->randomElement([
                 'Lucknow',
                 'Gomti Nagar',
                 'Indira Nagar',
@@ -34,9 +34,9 @@ class CasesFactory extends Factory
                 'Alambagh',
                 'Sitapur',
             ]),
-            'evidence_file' => 'evidence/' .$this->faker->uuid() . '.jpg',
-            'status' => $this->faker->randomElement(['Open', 'In Progress', 'Closed']),
-            'violation_date' => $this->faker->dateTimeBetween('-1 year', 'now'),
+            'evidence_file' => 'evidence/' . fake()->uuid() . '.jpg',
+            'status' => fake()->randomElement(['Open', 'In Progress', 'Closed']),
+            'violation_date' => fake()->dateTimeBetween('-1 year', 'now'),
         ];
     }
 }

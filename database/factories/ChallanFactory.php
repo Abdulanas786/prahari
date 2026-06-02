@@ -22,8 +22,8 @@ class ChallanFactory extends Factory
             'prahari_id' => $case->prahari_id,
             'case_id' => $case->id,
             'category_id' => $case->category_id,
-            'status' => $this->faker->randomElement(['Paid', 'Pending', 'Cancelled']),
-            'Date' => Carbon::instance($this->faker->dateTimeBetween('-1 year', 'now')),
+            'status' => fake()->randomElement(['Paid', 'Pending', 'Cancelled']),
+            'Date' => Carbon::instance(fake()->dateTimeBetween('-1 year', 'now')),
         ];
     }
 }

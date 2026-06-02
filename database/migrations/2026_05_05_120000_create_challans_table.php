@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('prahari_id')->constrained('praharis')->onDelete('cascade');
             $table->foreignId('case_id')->constrained('cases')->onDelete('cascade');
             $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
-            $table->enum('status', ['Paid', 'Pending', 'Cancelled'])->default('Pending');
+            $table->string('status')->default('Pending');
             $table->dateTime('Date');
             $table->timestamps();
         });

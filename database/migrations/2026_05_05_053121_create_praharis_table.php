@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('Prahari');
             $table->string('Mobile');
-            $table->enum('AadhaarStatus', ['Verified', 'Pending', 'Rejected'])->default('Verified');
+            $table->string('AadhaarStatus')->default('Verified');
             $table->string('Bank_account_detail')->unique();
-            $table->enum('status', ['Active','Inactive'])->default('Active');
+            $table->string('status')->default('Active');
             $table->timestamps();
         });
     }

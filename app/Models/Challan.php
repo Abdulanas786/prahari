@@ -15,6 +15,7 @@ class Challan extends Model
         'category_id',
         'status',
         'Date',
+        'is_paid',
     ];
 
     public function prahari() {

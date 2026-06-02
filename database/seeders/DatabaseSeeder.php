@@ -5,6 +5,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Category;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,14 +16,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-
-        // Call all seeders in proper order
-        $this->call([
-            CategorySeeder::class,
-            PrahariSeeder::class,
-            CasesSeeder::class,
-            ChallanSeeder::class,
-            PaymentSeeder::class,
-        ]);
+        // Only seed if tables are empty (prevents duplicates on re-deploy)
+        if (Category::count() === 0) {
+            $this->call([
+                CategorySeeder::class,
+                PrahariSeeder::class,
+                CasesSeeder::class,
+                ChallanSeeder::class,
+                PaymentSeeder::class,
+            ]);
+        }
     }
 }

@@ -22,9 +22,9 @@ class PaymentFactory extends Factory
         return [
             'prahari_id' => $prahari->id,
             'bank_account' => $prahari->Bank_account_detail . '-' . Str::upper(Str::random(4)),
-            'amount' => $this->faker->randomFloat(2, 1000, 20000),
-            'status' => $this->faker->randomElement(['Pending', 'Approved', 'Rejected']),
-            'date' => Carbon::instance($this->faker->dateTimeBetween('-1 year', 'now')),
+            'amount' => fake()->randomFloat(2, 1000, 20000),
+            'status' => fake()->randomElement(['Pending', 'Approved', 'Rejected']),
+            'date' => Carbon::instance(fake()->dateTimeBetween('-1 year', 'now')),
         ];
     }
 }

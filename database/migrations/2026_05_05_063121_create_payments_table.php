@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('prahari_id')->constrained('praharis')->onDelete('cascade');
             $table->string('bank_account')->unique();
             $table->decimal('amount', 10, 2);
-            $table->enum('status', ['Pending', 'Approved', 'Rejected'])->default('Pending');
+            $table->string('status')->default('Pending');
             $table->dateTime('date');
             $table->timestamps();
         });

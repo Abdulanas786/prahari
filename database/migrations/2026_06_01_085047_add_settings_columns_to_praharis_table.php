@@ -12,8 +12,8 @@ return new class extends Migration
 public function up(): void
 {
     Schema::table('praharis', function (Blueprint $table) {
-        $table->string('language')->default('English')->after('status');
-        $table->boolean('notifications_enabled')->default(true)->after('language');
+        $table->string('language')->default('English');
+        $table->boolean('notifications_enabled')->default(true);
     });
 }
 

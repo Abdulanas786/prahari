@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
             $table->string('Location');
             $table->string('evidence_file');
-            $table->enum('status', ['Open', 'In Progress', 'Closed'])->default('Open');
+            $table->string('status')->default('Open');
             $table->dateTime('violation_date');
             $table->timestamps();
         });
