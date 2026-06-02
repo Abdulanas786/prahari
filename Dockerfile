@@ -1,30 +1,25 @@
-FROM php:8.2-cli
-
+FROM php:8.2-apache
+WORKDIR /var/www/html
 RUN apt-get update && apt-get install -y \
-    git \
-    unzip \
-    zip \
-    libsqlite3-dev
-
-RUN docker-php-ext-install pdo pdo_sqlite
-
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-
-WORKDIR /app
-
+    libzip-dev \
+    libpq-dev \
+    zip unzip git curl \
+    && docker-php-ext-install \
+    pdo \
+    pdo_mysql \
+    pdo_pgsql \
+    zip
+RUN a2enmod rewrite
+# Point Apache to Laravel public folder
+RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
 COPY . .
-
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 RUN composer install --no-dev --optimize-autoloader
-
-RUN mkdir -p database
-RUN touch database/database.sqlite
-
-RUN mkdir -p storage/framework/sessions
-RUN mkdir -p storage/framework/views
-RUN mkdir -p storage/framework/cache
-
-RUN chmod -R 777 storage bootstrap/cache database
-
-EXPOSE 10000
-
-CMD php artisan serve --host=0.0.0.0 --port=10000
+RUN chown -R www-data:www-data /var/www/html \
+    && chmod -R 755 /var/www/html
+# EXPOSE 80
+# CMD ["apache2-foreground"]
+EXPOSE 80
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
+CMD ["/start.sh"]
