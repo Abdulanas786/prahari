@@ -15,11 +15,11 @@ class PrahariFactory extends Factory
     public function definition(): array
     {
         return [
-            'Prahari' => fake()->name(),
-            'Mobile' => fake()->numerify('9#########'),
-            'AadhaarStatus' => fake()->randomElement(['Verified', 'Pending', 'Rejected']),
-            'Bank_account_detail' => strtoupper(fake()->bothify('BANK#######')),
-            'status' => fake()->randomElement(['Active', 'Inactive']),
+            'Prahari' => \fake()->name(),
+            'Mobile' => \fake()->numerify('9#########'),
+            'AadhaarStatus' => \fake()->randomElement(['Verified', 'Pending', 'Rejected']),
+            'Bank_account_detail' => strtoupper(\fake()->bothify('BANK#######')),
+            'status' => \fake()->randomElement(['Active', 'Inactive']),
         ];
     }
 }
